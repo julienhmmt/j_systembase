@@ -33,12 +33,16 @@
   ansible.builtin.template:
     src: bashrc.j2
     dest: /home/{{ systembase_username }}/.bashrc
+    owner: "{{ systembase_username }}"
+    group: "{{ systembase_username }}"
     mode: "u=rw,g=r,o=r"
 
 - name: Copy bash aliases file for user
   ansible.builtin.template:
     src: bash_aliases.j2
     dest: /home/{{ systembase_username }}/.bash_aliases
+    owner: "{{ systembase_username }}"
+    group: "{{ systembase_username }}"
     mode: "u=rw,g=r,o=r"
 
 - name: Ensure the .ssh directory exists
