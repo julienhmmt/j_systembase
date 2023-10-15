@@ -21,16 +21,24 @@
     name: "{{ inventory_hostname }}"
   when: ansible_connection not in [ "container", "docker", "community.docker.docker" ]
 
-- name: Adding user in sudo group
+- name: Creating custom user and adding it to sudo group
   ansible.builtin.user:
     append: true
     groups: sudo
     name: "{{ systembase_username }}"
+    shell: /bin/bash
+    state: present
 
 - name: Copy better bashrc file for user
   ansible.builtin.template:
     src: bashrc.j2
     dest: /home/{{ systembase_username }}/.bashrc
+    mode: "u=rw,g=r,o=r"
+
+- name: Copy bash aliases file for user
+  ansible.builtin.template:
+    src: bash_aliases.j2
+    dest: /home/{{ systembase_username }}/.bash_aliases
     mode: "u=rw,g=r,o=r"
 
 - name: Ensure the .ssh directory exists
