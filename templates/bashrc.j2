@@ -1,0 +1,47 @@
+# {{ ansible_managed }}
+# ~/.bashrc: Executed by bash(1) for non-interactive shells.
+# See /usr/share/doc/bash/examples/startup-files (in the bash-doc package) for examples.
+
+# Do nothing if it's not an interactive shell
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# History settings
+HISTCONTROL=ignoreboth
+shopt -s histappend
+HISTSIZE=10000
+HISTFILESIZE=20000
+
+# Update terminal size information
+shopt -s checkwinsize
+
+# Set a simple prompt
+PS1="\u@\h:\w\$ "
+
+# Enable ls colorization and add useful aliases
+if [ -x /usr/bin/dircolors ]; then
+    eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+fi
+
+# Define GCC colors for warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# If you have additional aliases, you can define them in a separate file like ~/.bash_aliases
+
+# Enable programmable completion features
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+export HISTTIMEFORMAT="%d/%m/%y %T "
+
+# Colors for file/directory listings (ls)
+export LS_COLORS="di=1;36:fi=0:ln=35:ex=32:*.rpm=90"
