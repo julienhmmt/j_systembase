@@ -1,2 +1,15 @@
 ---
 # file: default/main.yml
+
+systembase_packages:
+  - apt-transport-https
+  - bash-completion
+  - curl
+  - htop
+  - logrotate
+  - openssh-server
+  - sudo
+  - tree
+
+systembase_ssh_pubkey: ""
+systembase_username: "tux"

@@ -1,2 +1,14 @@
 ---
 # file: vars/main.yml
+
+systembase_packages:
+  - htop
+  - iftop
+  - iotop
+  - rsync
+  - strace
+  - sysstat
+  - wireguard
+
+systembase_ssh_pubkey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEEHKEQ6FLrn8b85ClMxvu04DbAiyMZ5tf5ktL4xEpSZ mettmett@JH-LVL10"
+systembase_username: "jho"

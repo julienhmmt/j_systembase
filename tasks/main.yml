@@ -1,2 +1,6 @@
 ---
-# file: tasks/main.yml
+# file: j_systembase/tasks/main.yml
+
+- name: Include "base" tasks file
+  ansible.builtin.include_tasks: base.yml
+  tags: base

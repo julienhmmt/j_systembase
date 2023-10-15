@@ -1,0 +1,48 @@
+---
+# file: j_systembase/tasks/base.yml
+
+- name: Install somes useful packages
+  ansible.builtin.apt:
+    install-recommends: false
+    name: "{{ systembase_packages }}"
+    state: present
+    update-cache: true
+
+- name: Install qemu-guest-agent only on VM
+  ansible.builtin.apt:
+    install-recommends: false
+    name: qemu-guest-agent
+    state: present
+    update-cache: true
+  when: ansible_virtualization_type != "physical" 
+
+- name: Setting hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+  when: ansible_connection not in [ "container", "docker", "community.docker.docker" ]
+
+- name: Adding user in sudo group
+  ansible.builtin.user:
+    append: true
+    groups: sudo
+    name: "{{ systembase_username }}"
+
+- name: Copy better bashrc file for user
+  ansible.builtin.template:
+    src: bashrc.j2
+    dest: /home/{{ systembase_username }}/.bashrc
+    mode: "u=rw,g=r,o=r"
+
+- name: Ensure the .ssh directory exists
+  ansible.builtin.file:
+    path: "/home/{{ systembase_username }}/.ssh"
+    state: directory
+    owner: "{{ systembase_username }}"
+    group: "{{ systembase_username }}"
+    mode: "u=rwx,g=,o="
+
+- name: Install the SSH public key
+  ansible.posix.authorized_key:
+    user: "{{ systembase_username }}"
+    key: "{{ systembase_ssh_pubkey }}"
+    state: present

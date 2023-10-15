@@ -20,16 +20,16 @@ molecule login --host molecule-debian12
 molecule login --host molecule-ubuntu
 ```
 
-Install needed ansible collections
+Install needed ansible collections (molecule will do it itself)
 
 ```bash
 ansible-galaxy collection install -r requirements.yml
 ```
 
-Use ansible on molecule hosts (check mode):
+Use ansible/molecule on molecule hosts (check mode):
 
 ```bash
-ansible-playbook -i hosts play.yml --limit=molecule --check
+molecule converge
 ```
 
 Destroy everything:
