@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Julien HOMMET
+  description: prepare the system, with few tools and some customization to have a ready-to-use system.
+  license: MPL-2.0
+  min_ansible_version: "2.9"
+  namespace: jh
+  platforms:
+    - name: Debian
+      versions:
+        - bookworm
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - bionic
+  role_name: j_systembase
+dependencies:
+  []
