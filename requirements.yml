@@ -1,0 +1,6 @@
+---
+# file: j_systembase/requirements.yml
+
+collections:
+  - name: ansible.posix
+    version: 1.5.4
