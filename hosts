@@ -1,0 +1,7 @@
+[all]
+molecule
+
+[molecule]
+molecule-debian11
+molecule-debian12
+molecule-ubuntu
