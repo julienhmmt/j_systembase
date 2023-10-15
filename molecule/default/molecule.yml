@@ -41,20 +41,6 @@ provisioner:
       callback_whitelist: profile_tasks, timer, yaml
     ssh_connection:
       pipelining: false
-  inventory:
-    host_vars:
-      molecule-debian11:
-        ansible_fqdn: "molecule-debian11.lab.local"
-        inventory_hostname: "molecule-debian11"
-        systembase_username: "molecule"
-      molecule-debian12:
-        ansible_fqdn: "molecule-debian12.lab.local"
-        inventory_hostname: "molecule-debian12"
-        systembase_username: "molecule"
-      molecule-ubuntu:
-        ansible_fqdn: "molecule-ubuntu.lab.local"
-        inventory_hostname: "molecule-ubuntu"
-        systembase_username: "molecule"
 
 scenario:
   name: default
